@@ -1,0 +1,19 @@
+
+.demo-ripple-container {
+  height: 150px;
+  width: 200px;
+  position: relative;
+  transition: all 200ms linear;
+  border: 1px solid black;
+}
+
+
+.material-icons.orange600 { color: #FB8C00; }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.left-padding {
+  padding-left: 20px;
+}

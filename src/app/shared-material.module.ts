@@ -18,13 +18,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   imports: [
     MatButtonModule,
+    MatButtonToggleModule,
     MatToolbarModule,
-    MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatTooltipModule,
@@ -47,8 +47,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ], // 先import
   exports: [
     MatButtonModule,
+    MatButtonToggleModule,
     MatToolbarModule,
-    MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatTooltipModule,

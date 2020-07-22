@@ -40,7 +40,7 @@ export class Link1Component implements OnInit {
   radius: number;
   color: string;
 
-  /* 4.select */
+  /* select */
   foods: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
@@ -48,7 +48,7 @@ export class Link1Component implements OnInit {
   ];
   selectedFood = this.foods[2].value;
 
-  /* 5.From */
+  /* From */
   email = new FormControl('', [Validators.required, Validators.email]);
 
   getErrorMessage() {
@@ -59,7 +59,7 @@ export class Link1Component implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  /* 6.Dialog */
+  /* Dialog */
   name: string;
   project: string;
 
@@ -79,7 +79,7 @@ export class Link1Component implements OnInit {
     });
   }
 
-  /* 7. Chip */
+  /* Chip */
   /* MatChip Properties */
   selectable = true;
   removable = true;

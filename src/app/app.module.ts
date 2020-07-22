@@ -30,6 +30,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { SharedMaterialModule } from './shared-material.module';
 
 
+/* we need this to make custom icon work */
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +50,7 @@ import { SharedMaterialModule } from './shared-material.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    HttpClientModule,
     FormsModule,
     SharedMaterialModule,
 
