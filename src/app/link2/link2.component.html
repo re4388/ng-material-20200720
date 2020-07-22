@@ -1,0 +1,81 @@
+<h2>Grid List</h2>
+
+<h3>Cols - Rows</h3>
+<mat-form-field class="example-ripple-form-field">
+  <input
+    matInput
+    [(ngModel)]="tiles[0].cols"
+    type="number"
+    placeholder="cols"
+  />
+</mat-form-field>
+<mat-form-field class="example-ripple-form-field">
+  <input
+    matInput
+    [(ngModel)]="tiles[0].rows"
+    type="number"
+    placeholder="rows"
+  />
+</mat-form-field>
+<br />
+<mat-form-field class="example-ripple-form-field">
+  <input
+    matInput
+    [(ngModel)]="tiles[1].cols"
+    type="number"
+    placeholder="cols"
+  />
+</mat-form-field>
+<mat-form-field class="example-ripple-form-field">
+  <input
+    matInput
+    [(ngModel)]="tiles[1].rows"
+    type="number"
+    placeholder="rows"
+  />
+</mat-form-field>
+<br />
+<mat-form-field class="example-ripple-form-field">
+  <input
+    matInput
+    [(ngModel)]="tiles[2].cols"
+    type="number"
+    placeholder="cols"
+  />
+</mat-form-field>
+<mat-form-field class="example-ripple-form-field">
+  <input
+    matInput
+    [(ngModel)]="tiles[2].rows"
+    type="number"
+    placeholder="rows"
+  />
+</mat-form-field>
+<br />
+<mat-form-field class="example-ripple-form-field">
+  <input
+    matInput
+    [(ngModel)]="tiles[3].cols"
+    type="number"
+    placeholder="cols"
+  />
+</mat-form-field>
+<mat-form-field class="example-ripple-form-field">
+  <input
+    matInput
+    [(ngModel)]="tiles[3].rows"
+    type="number"
+    placeholder="rows"
+  />
+</mat-form-field>
+
+<mat-grid-list cols="4" rowHeight="50px">
+  <mat-grid-tile
+    *ngFor="let tile of tiles"
+    [colspan]="tile.cols"
+    [rowspan]="tile.rows"
+    [style.background]="tile.color"
+  >
+    {{ tile.text }}
+  </mat-grid-tile>
+</mat-grid-list>
