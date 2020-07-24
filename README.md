@@ -1,5 +1,10 @@
 # Material20200720
 
+
+## learning practice
+learning material: https://ithelp.ithome.com.tw/articles/10196731
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
 
 ## Development server
