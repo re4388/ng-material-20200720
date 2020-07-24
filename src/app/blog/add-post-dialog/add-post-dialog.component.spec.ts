@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Link2Component } from './link2.component';
+import { AddPostDialogComponent } from './add-post-dialog.component';
 
-describe('Link2Component', () => {
-  let component: Link2Component;
-  let fixture: ComponentFixture<Link2Component>;
+describe('AddPostDialogComponent', () => {
+  let component: AddPostDialogComponent;
+  let fixture: ComponentFixture<AddPostDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Link2Component ]
+      declarations: [ AddPostDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Link2Component);
+    fixture = TestBed.createComponent(AddPostDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,337 @@
+<div class="left-padding">
+  <h2>Survey Demo</h2>
+  <button mat-button (click)="isLinear = !isLinear">切換Linear狀態</button>
+
+  <form [formGroup]="surveyForm">
+    <mat-vertical-stepper [linear]="isLinear">
+      <mat-step
+        formGroupName="basicQuestions"
+        [stepControl]="surveyForm.get('basicQuestions')"
+        optional
+      >
+        <ng-template matStepLabel>
+          <u>個人資訊</u>
+        </ng-template>
+        <h4>提供個人資訊</h4>
+        <mat-form-field floatLabel="auto" color="primary">
+          <input name="name" matInput formControlName="name" required />
+          <mat-placeholder>
+            <mat-icon>person</mat-icon>請輸入您的姓名
+          </mat-placeholder>
+          <mat-hint align="end">
+            已輸入：
+            {{
+              surveyForm.get("basicQuestions")?.get("name")?.value?.length || 0
+            }}
+            / 5
+          </mat-hint>
+        </mat-form-field>
+        <div>
+          <mat-form-field>
+            <input type="text" name="nickname" matInput placeholder="暱稱" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input
+              type="text"
+              name="country"
+              matInput
+              placeholder="國家"
+              formControlName="country"
+              [matAutocomplete]="countries"
+            />
+          </mat-form-field>
+          <mat-autocomplete
+            #countries="matAutocomplete"
+            [displayWith]="displayCountry"
+          >
+            <mat-option
+              *ngFor="let country of countries$ | async"
+              [value]="country"
+            >
+              <span [innerHTML]="highlightFiltered(country.name)"></span>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+        <div>
+          <mat-form-field>
+            <input
+              type="text"
+              name="majorTech"
+              matInput
+              placeholder="代表技術"
+              formControlName="majorTech"
+              [matAutocomplete]="majorTechs"
+            />
+          </mat-form-field>
+          <mat-autocomplete #majorTechs="matAutocomplete">
+            <mat-optgroup
+              *ngFor="let techList of majorTechList"
+              [label]="techList.name"
+            >
+              <mat-option *ngFor="let tech of techList.items" [value]="tech">
+                {{ tech }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-autocomplete>
+        </div>
+        <div>
+          <mat-form-field>
+            <textarea
+              name="intro_self"
+              matInput
+              placeholder="自我介紹"
+              formControlName="intro"
+              required
+              matTextareaAutosize
+            ></textarea>
+            <mat-hint>簡單介紹一下你的興趣吧！</mat-hint>
+            <mat-error
+              *ngIf="
+                surveyForm
+                  .get('basicQuestions')
+                  .get('intro')
+                  .hasError('required')
+              "
+              >請記得輸入自我介紹喔！</mat-error
+            >
+            <mat-error
+              *ngIf="
+                surveyForm
+                  .get('basicQuestions')
+                  .get('intro')
+                  .hasError('minlength')
+              "
+              >至少輸入10個字吧！</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div>
+          <!-- <mat-form-field>
+            <input type="date" name="birthday" matInput placeholder="生日" />
+          </mat-form-field> -->
+          <mat-form-field>
+            <input
+              type="text"
+              name="birthday"
+              matInput
+              placeholder="生日"
+              [matDatepicker]="birthdayPicker"
+              [min]="minDate"
+              [max]="maxDate"
+              [matDatepickerFilter]="familyDayFilter"
+              (dateInput)="logDateInput($event)"
+              (dateInput)="logDateChange($event)"
+            />
+            <mat-datepicker-toggle
+              [for]="birthdayPicker"
+              matSuffix
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #birthdayPicker
+              [startAt]="startDate"
+            ></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select
+              formControlName="interest"
+              #selectInterest
+              placeholder="你的休閒愛好?"
+              multiple
+              panelClass="blue-dropdown"
+            >
+              <mat-select-trigger>
+                共選擇了 {{ selectInterest.selected.length }} 項興趣
+              </mat-select-trigger>
+              <mat-option [value]="undefined">無</mat-option>
+              <mat-optgroup
+                *ngFor="let parent of nestInterestList; let index = index"
+                [label]="parent.name"
+                [disabled]="index === 1"
+              >
+                <mat-option
+                  *ngFor="let child of parent.subItems"
+                  [value]="child.id"
+                  >{{ child.name }}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button mat-button matStepperNext>前進到「詳細問題」</button>
+        </div>
+      </mat-step>
+      <!-- 這個step無法被切回來 -->
+      <mat-step
+        editable="false"
+        formGroupName="mainQuestions"
+        [stepControl]="surveyForm.get('mainQuestions')"
+      >
+        <ng-template matStepLabel>
+          <em>詳細問題</em>
+        </ng-template>
+        <h4>主要的問題內容</h4>
+        <div>
+          <mat-form-field>
+            <input
+              type="number"
+              matInput
+              placeholder="請問您的平均日常消費？"
+            />
+            <mat-icon matPrefix>attach_money</mat-icon>
+            <span matSuffix>新台幣</span>
+          </mat-form-field>
+        </div>
+        <section>
+          <h4>除了生活消費外，你最常花費在哪些項目上？</h4>
+          <mat-checkbox
+            formControlName="payForAll"
+            [indeterminate]="indeterminateSelectedPayFor"
+            (change)="checkAllChange($event)"
+            >全部</mat-checkbox
+          >
+          <mat-checkbox
+            formControlName="payForBook"
+            (change)="payForChange()"
+            color="primary"
+            >書籍</mat-checkbox
+          >
+          <mat-checkbox
+            formControlName="payForMusic"
+            (change)="payForChange()"
+            color="accent"
+            >音樂</mat-checkbox
+          >
+          <mat-checkbox
+            formControlName="payForMovie"
+            (change)="payForChange()"
+            color="warn"
+            >電影</mat-checkbox
+          >
+        </section>
+        <section>
+          <h5>對於Angular，你的評價是？</h5>
+          <mat-radio-group formControlName="angularLikeScore">
+            <mat-radio-button [value]="1">超討厭</mat-radio-button>
+            <mat-radio-button [value]="2">討厭</mat-radio-button>
+            <mat-radio-button [value]="3">普通</mat-radio-button>
+            <mat-radio-button [value]="4">喜歡</mat-radio-button>
+            <mat-radio-button [value]="5">超喜歡</mat-radio-button>
+          </mat-radio-group>
+          <h5>對於Angular Material，你的評價是？</h5>
+          <mat-radio-group formControlName="angularMaterialLikeScore">
+            <mat-radio-button [value]="1">超討厭</mat-radio-button>
+            <mat-radio-button [value]="2">討厭</mat-radio-button>
+            <mat-radio-button [value]="3">普通</mat-radio-button>
+            <mat-radio-button [value]="4">喜歡</mat-radio-button>
+            <mat-radio-button [value]="5">超喜歡</mat-radio-button>
+          </mat-radio-group>
+        </section>
+        <section>
+          <h5>訂閱電子報</h5>
+          <div>
+            <mat-slide-toggle formControlName="subscribeAngular"
+              >Angular技巧全集
+            </mat-slide-toggle>
+          </div>
+          <div>
+            <mat-slide-toggle formControlName="subscribeAngularMaterial"
+              >Angular Material全攻略
+            </mat-slide-toggle>
+          </div>
+          <div>
+            <mat-slide-toggle formControlName="subscribeNgRx"
+              >NgRx入門班
+            </mat-slide-toggle>
+          </div>
+        </section>
+        <button mat-button matStepperPrevious>回進到「個人資訊」</button>
+        <button mat-button matStepperNext>前進到「其他」</button>
+      </mat-step>
+      <mat-step
+        label="其他"
+        formGroupName="otherQuestions"
+        [stepControl]="surveyForm.get('otherQuestions')"
+      >
+        <h4>其他問題</h4>
+        <section>
+          <div>選擇你最喜歡的顏色</div>
+          <div>
+            <span>Red</span>
+            <mat-slider
+              formControlName="favoriteColorRed"
+              min="0"
+              max="255"
+              step="1"
+              vertical
+            ></mat-slider>
+          </div>
+          <div>
+            <span>Green</span>
+            <mat-slider
+              formControlName="favoriteColorGreen"
+              min="0"
+              max="255"
+              step="1"
+              invert
+            ></mat-slider>
+          </div>
+          <div>
+            <span>Blue</span>
+            <mat-slider
+              formControlName="favoriteColorBlue"
+              min="0"
+              max="255"
+              step="1"
+            ></mat-slider>
+          </div>
+          <div>
+            RGB: ({{ selectedColorRed }}, {{ selectedColorGreen }},
+            {{ selectedColorBlue }})
+          </div>
+          <div
+            style="width: 50px; height: 50px; border: 1px solid #000;"
+            [ngStyle]="{ background: selectedColorStyle }"
+          ></div>
+        </section>
+        <br /><br />
+        <section>
+          <div>關於這個問卷你覺得設計得如何？</div>
+          <br />
+          <mat-slider
+            formControlName="surveyScore"
+            min="0"
+            max="100"
+            step="10"
+            thumbLabel
+          >
+          </mat-slider>
+        </section>
+        <button mat-button matStepperPrevious>回進到「詳細問題」</button>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+
+  <br /><br />
+
+  <br /><br />
+
+  <br /><br />
+
+
+
+
+  <br /><br />
+
+
+
+
+
+
+
+  </div>

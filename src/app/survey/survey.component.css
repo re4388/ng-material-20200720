@@ -1,11 +1,5 @@
 
-.demo-ripple-container {
-  height: 150px;
-  width: 200px;
-  position: relative;
-  transition: all 200ms linear;
-  border: 1px solid black;
-}
+
 
 
 .material-icons.orange600 { color: #FB8C00; }
@@ -16,4 +10,9 @@
 
 .left-padding {
   padding-left: 20px;
+}
+
+.autocomplete-highlight {
+  font-weight: bold;
+  background: yellow;
 }

@@ -1,0 +1,113 @@
+<div class="left-padding">
+  <section>
+    <h2>Button Toggle</h2>
+
+    <mat-button-toggle>Button Toggle</mat-button-toggle>
+    <br /><br />
+    How to use it?
+    <br />
+    We usually put them in a group and use template variable to get each element
+    value in group
+    <br />
+    <!-- https://material.angular.io/components/button-toggle/api -->
+    <mat-button-toggle-group #formatAlignGroup="matButtonToggleGroup">
+      <!-- button toggle 所代表的值 -->
+      <mat-button-toggle value="left">
+        <mat-icon>format_align_left</mat-icon>
+      </mat-button-toggle>
+      <!-- 預設被選取 -->
+      <mat-button-toggle value="center" checked="true">
+        <mat-icon>format_align_center</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="right">
+        <mat-icon>format_align_right</mat-icon>
+      </mat-button-toggle>
+      <!-- 不允許選擇的button toggle -->
+      <mat-button-toggle value="justify" disabled>
+        <mat-icon>format_align_justify</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <div>對齊方式為：{{ formatAlignGroup.value }}</div>
+
+    <!-- 加上multiple，則裡面的mat-button-toggle可以複選 -->
+    <!-- 加上vertical="true", 改變排列方式 -->
+    <mat-button-toggle-group multiple vertical="true">
+      <mat-button-toggle value="bold" #buttonToggleBold>
+        <mat-icon>format_bold</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="italic" checked="true" #buttonToggleItalic>
+        <mat-icon>format_italic</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="underlined"
+        checked="true"
+        #buttonToggleUnderlined
+      >
+        <mat-icon>format_underlined</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <div>
+      粗體：{{ buttonToggleBold.checked }}、斜體：{{
+        buttonToggleItalic.checked
+      }}、底線：{{ buttonToggleUnderlined.checked }}
+    </div>
+  </section>
+
+  <section>
+    <h2>More on Ripple</h2>
+    <div
+      class="demo-ripple-container"
+      mat-ripple
+      [matRippleCentered]="false"
+      [matRippleDisabled]="false"
+      [matRippleUnbounded]="false"
+      [matRippleRadius]="10"
+      [matRippleColor]="'pink'"
+    ></div>
+    <button mat-raised-button (click)="triggerRipple()">
+      trigger ripple effect
+    </button>
+    <button mat-raised-button (click)="clearRipple()">
+      clear ripple effect
+    </button>
+  </section>
+
+  <section>
+    <h2>List</h2>
+    <mat-nav-list>
+      <h3 matSubheader><mat-icon>chat_bubble</mat-icon> New Message</h3>
+      <mat-list-item *ngIf="optNew.selected">New Message 1</mat-list-item>
+      <mat-list-item *ngIf="optNew.selected">New Message 2</mat-list-item>
+      <mat-list-item *ngIf="optNew.selected">New Message 3</mat-list-item>
+      <mat-list-item *ngIf="optAds.selected">AD message</mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 matSubheader><mat-icon>settings</mat-icon> Setting</h3>
+      <mat-selection-list>
+        <mat-list-option [value]="1" selected="true" #optNew
+          >Notify When Receive Message</mat-list-option
+        >
+        <mat-list-option [value]="2" #optAds>Show AD Message</mat-list-option>
+      </mat-selection-list>
+    </mat-nav-list>
+  </section>
+
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</div>

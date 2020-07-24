@@ -1,4 +1,5 @@
 
+
 /* basic  */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,8 +12,8 @@ import {
   Link1Component,
   DialogOverviewExampleDialogComponent,
 } from './link1/link1.component';
-import { Link2Component } from './link2/link2.component';
 import { Link3Component } from './link3/link3.component';
+import { SurveyComponent } from './survey/survey.component';
 
 /* double binding required */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +33,14 @@ import { SharedMaterialModule } from './shared-material.module';
 
 /* we need this to make custom icon work */
 import { HttpClientModule } from '@angular/common/http';
+import { DynamicGridComponent } from './dynamic-grid/dynamic-grid.component';
+import { ButtonIconComponent } from './button-icon/button-icon.component';
+import { BlogComponent } from './blog/blog.component';
+import { AddPostDialogComponent } from './blog/add-post-dialog/add-post-dialog.component';
+import { AddPostConfirmDialogComponent } from './blog/add-post-confirm-dialog/add-post-confirm-dialog.component';
+import { AfterPostNotifyComponent } from './blog/after-post-notify/after-post-notify.component';
+import { InboxComponent } from './inbox/inbox.component';
+
 
 
 @NgModule({
@@ -39,9 +48,16 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     NavComponent,
     Link1Component,
-    Link2Component,
+    SurveyComponent,
     Link3Component,
     DialogOverviewExampleDialogComponent,
+    DynamicGridComponent,
+    ButtonIconComponent,
+    BlogComponent,
+    AddPostDialogComponent,
+    AddPostConfirmDialogComponent,
+    AfterPostNotifyComponent,
+    InboxComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +69,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     FormsModule,
     SharedMaterialModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [AddPostDialogComponent, AfterPostNotifyComponent],
 })
 export class AppModule {}
