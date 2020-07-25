@@ -40,6 +40,7 @@ import { AddPostDialogComponent } from './blog/add-post-dialog/add-post-dialog.c
 import { AddPostConfirmDialogComponent } from './blog/add-post-confirm-dialog/add-post-confirm-dialog.component';
 import { AfterPostNotifyComponent } from './blog/after-post-notify/after-post-notify.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { EmailListComponent } from './inbox/email-list/email-list.component';
 
 
 
@@ -58,6 +59,7 @@ import { InboxComponent } from './inbox/inbox.component';
     AddPostConfirmDialogComponent,
     AfterPostNotifyComponent,
     InboxComponent,
+    EmailListComponent,
   ],
   imports: [
     BrowserModule,

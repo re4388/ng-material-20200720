@@ -7,6 +7,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
   styleUrls: ['./inbox.component.css'],
 })
 export class InboxComponent implements OnInit {
+
   tabIndex = 0;
   tabFocusChange($event: MatTabChangeEvent): void {
     console.log(`focus變更，indx：${$event.index}`);
@@ -21,5 +22,7 @@ export class InboxComponent implements OnInit {
   }
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 }

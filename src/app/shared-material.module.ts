@@ -31,7 +31,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const TW_FORMATS = {
   parse: {
@@ -82,6 +84,9 @@ export const TW_FORMATS = {
     MatSnackBarModule,
     MatExpansionModule,
     MatTabsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ], // 先import
   exports: [
     MatButtonModule,
@@ -118,6 +123,9 @@ export const TW_FORMATS = {
     MatSnackBarModule,
     MatExpansionModule,
     MatTabsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ], // 在export
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
