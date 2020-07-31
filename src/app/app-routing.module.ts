@@ -13,6 +13,7 @@ import { SimpleHttpComponent } from './simple-http/simple-http.component';
 
 
 const routes: Routes = [
+  {path: '', redirectTo: 'simple-http', pathMatch: 'full'},
   { path: 'link1', component: Link1Component },
   { path: 'button-icon', component: ButtonIconComponent },
   { path: 'simple-http', component: SimpleHttpComponent },
