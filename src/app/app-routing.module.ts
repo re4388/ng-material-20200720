@@ -7,16 +7,22 @@ import { DynamicGridComponent } from './dynamic-grid/dynamic-grid.component';
 import { ButtonIconComponent } from './button-icon/button-icon.component';
 import { BlogComponent } from './blog/blog.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { CdkObserveContentDemoComponent } from './cdk-observe-content-demo/cdk-observe-content-demo.component';
+import { AutoLogoutComponent } from './auto-logout/auto-logout.component';
+import { SimpleHttpComponent } from './simple-http/simple-http.component';
 
 
 const routes: Routes = [
   { path: 'link1', component: Link1Component },
   { path: 'button-icon', component: ButtonIconComponent },
+  { path: 'simple-http', component: SimpleHttpComponent },
   { path: 'survey', component: SurveyComponent },
   { path: 'link3', component: Link3Component },
   { path: 'dynamic-grid', component: DynamicGridComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'inbox', component: InboxComponent },
+  { path: 'cdk', component: CdkObserveContentDemoComponent },
+  { path: 'auto-logout', component: AutoLogoutComponent },
 ];
 
 @NgModule({

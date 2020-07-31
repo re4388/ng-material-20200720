@@ -1,5 +1,25 @@
 <div class="left-padding">
   <section>
+
+    <h2>custom style</h2>
+    <p class="custom-mat-100">red 100</p>
+    <h2>demo Observe cdk</h2>
+    <app-cdk-observe-content-demo>
+      {{ displayContent }}
+    </app-cdk-observe-content-demo>
+
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="displayContent = displayContent + 1"
+      >
+        add 1
+      </button>
+    </div>
+
+  </section>
+  <section>
     <h2>Button</h2>
 
     <button mat-button>flatButton</button>

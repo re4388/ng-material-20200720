@@ -1,0 +1,178 @@
+// @import './themes/custom-theme.scss';
+// @include mat-core();
+
+// $custom-primary: mat-palette($mat-light-blue);
+// $custom-accent: mat-palette($mat-green);
+// $custom-warn: mat-palette($mat-brown);
+// $custom-theme: mat-dark-theme($custom-primary, $custom-accent, $custom-warn);
+// .custom-theme-1 {
+//   @include angular-material-theme($custom-theme);
+// }
+
+// $custom-primary-2: mat-palette($mat-yellow, 800);
+// $custom-accent-2: mat-palette($mat-deep-orange);
+// $custom-warn-2: mat-palette($mat-pink);
+// $custom-theme-2: mat-dark-theme($custom-primary-2, $custom-accent-2, $custom-warn-2);
+// .custom-theme-2 {
+//   @include angular-material-theme($custom-theme-2);
+// }
+
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
+@include mat-core();
+
+// Define the default theme (same as the example above).
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-theme:   mat-light-theme((
+  color: (
+    primary: $candy-app-primary,
+    accent: $candy-app-accent,
+  )
+));
+
+// Include the default theme styles (color and default density)
+// @include angular-material-theme($candy-app-theme);
+
+
+.custom-theme-1 {
+  @include angular-material-theme($candy-app-theme);
+}
+
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  )
+));
+
+// Include the dark color styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.custom-theme-2 {
+  @include angular-material-color($dark-theme);
+}
+
+$mat-red:(
+  900:#b71c1c,
+  500:#f44336
+);
+.custom-mat-100 {
+    color: map-get($mat-red, 500);
+}
+
+body {
+  margin: 0px;
+}
+
+.demo-app-header {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+.demo-app-container,
+.demo-app-sidenav {
+  position: absolute;
+  padding-top: 64px;
+  height: 100vh;
+}
+
+.demo-app-sidenav {
+  width: 300px;
+}
+
+.toolbar-seprator {
+  flex: 1 1 auto;
+}
+
+.autocomplete-highlight {
+  font-weight: bold;
+  background: yellow;
+}
+
+.blue-dropdown .mat-select-content {
+  background: rgba(0, 0, 255, 0.5);
+}
+
+.post-tile {
+  align-self: flex-start;
+  width: 100%;
+  margin: 5px;
+}
+
+.blog-sidebard-content {
+  align-self: flex-start;
+  padding-top: 100px;
+  width: 95%;
+}
+
+.post-tile .mat-card-image {
+  max-height: 300px;
+}
+
+mat-card:focus {
+  background: lightblue;
+  width: 95%;
+}
+
+.mat-basic-chip {
+  background: lime;
+  margin: 0 0 0 8px;
+  padding: 7px 12px;
+  border-radius: 5px;
+}
+
+.mat-sort-header-position-before {
+  justify-content: flex-end;
+}
+
+.float-menu {
+  position: fixed !important;
+  right: 15px;
+  bottom: 15px;
+  z-index: 2;
+}
+
+.fab-menu-panel {
+  border: 1px solid black;
+  background-color: white;
+}
+
+.fab-menu-panel .mat-nav-list {
+  padding-top: 0px;
+}
+
+
+
+
+
+
+
+/* You can add global styles to this file, and also import other style files */
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+// @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+/* @import "~@angular/material/prebuilt-themes/purple-green.css"; */
+/* @import "~@angular/material/prebuilt-themes/pink-bluegrey.css"; */
+
+// html, body {
+//   height: 100%
+// }
+// body {
+//   margin: 0;
+//   font-family: Roboto, "Noto Sans TC", "Helvetica Neue", sans-serif;
+// }
+
+
+// .blue-dropdown .mat-select-content {
+//   background: rgba(0, 0, 255, 0.5);
+// }

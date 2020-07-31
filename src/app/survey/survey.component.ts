@@ -12,6 +12,9 @@ import {
   AfterViewInit,
   enableProdMode,
   Injectable,
+  ViewChildren,
+  QueryList,
+  HostListener,
 } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatStepperIntl } from '@angular/material/stepper';
@@ -24,6 +27,10 @@ import {
   MatCheckboxChange,
   MAT_CHECKBOX_DEFAULT_OPTIONS,
 } from '@angular/material/checkbox';
+import { SurveyInputDirective } from './survey-input.directive';
+import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
+import { UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Injectable()
 export class TwStepperIntl extends MatStepperIntl {
@@ -41,8 +48,6 @@ export class EarlyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-
-
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
@@ -53,7 +58,17 @@ export class EarlyErrorStateMatcher implements ErrorStateMatcher {
     // { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: 'noop' },
   ],
 })
-export class SurveyComponent implements OnInit {
+export class SurveyComponent implements OnInit, AfterViewInit {
+  isHandset$: Observable<boolean>;
+
+  @ViewChildren(SurveyInputDirective) surveyInputs: QueryList<
+    SurveyInputDirective
+  >;
+
+  keyManager: FocusKeyManager<SurveyInputDirective>;
+
+  displayFocusTrap: boolean;
+
   startDate = moment('1999-1-10', 'YYYY-MM-DD');
   minDate = moment('1999-1-5', 'YYYY-MM-DD');
   maxDate = moment('1999-1-25', 'YYYY-MM-DD');
@@ -70,6 +85,20 @@ export class SurveyComponent implements OnInit {
 
   indeterminateSelectedPayFor: boolean;
 
+  @HostListener('keydown', ['$event'])
+  keydown($event: KeyboardEvent): void {
+    // 監聽鍵盤事件並依照案件設定按鈕focus狀態
+    if ($event.keyCode === UP_ARROW) {
+      this.keyManager.setPreviousItemActive();
+    } else if ($event.keyCode === DOWN_ARROW) {
+      this.keyManager.setNextItemActive();
+    }
+  }
+  ngAfterViewInit(): void {
+    this.keyManager = new FocusKeyManager(this.surveyInputs).withWrap();
+    this.keyManager.setActiveItem(0);
+  }
+
   familyDayFilter(date: moment.Moment): boolean {
     const day = date.day();
     return day !== 2 && day !== 5;
@@ -83,7 +112,9 @@ export class SurveyComponent implements OnInit {
   }
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private announcer: LiveAnnouncer,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.surveyForm = new FormGroup({
       basicQuestions: new FormGroup({
@@ -114,6 +145,10 @@ export class SurveyComponent implements OnInit {
         surveyScore: new FormControl(5),
       }),
     });
+  }
+
+  public announce(): void {
+    this.announcer.announce('Hello world!', 'assertive');
   }
 
   get selectedColorRed(): void {
@@ -193,6 +228,12 @@ export class SurveyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.isHandset$ = this.breakpointObserver
+      .observe(Breakpoints.Handset).pipe(
+        map((match) => match.matches)
+      );
+
     this._setSelectAllState();
     this.surveyForm
       .get('basicQuestions')
@@ -269,6 +310,5 @@ export class SurveyComponent implements OnInit {
         ],
       },
     ];
-
   }
 }

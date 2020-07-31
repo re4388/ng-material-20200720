@@ -34,6 +34,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { A11yModule } from '@angular/cdk/a11y';
+import { BidiModule } from '@angular/cdk/bidi';
+import { LayoutModule } from '@angular/cdk/layout';
+import { ObserversModule } from '@angular/cdk/observers';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
+import { PortalModule } from '@angular/cdk/portal';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 export const TW_FORMATS = {
   parse: {
@@ -87,6 +94,13 @@ export const TW_FORMATS = {
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    A11yModule,
+    BidiModule,
+    LayoutModule,
+    ObserversModule,
+    CdkScrollableModule,
+    PortalModule,
+    OverlayModule,
   ], // 先import
   exports: [
     MatButtonModule,
@@ -125,7 +139,14 @@ export const TW_FORMATS = {
     MatTabsModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    A11yModule,
+    BidiModule,
+    LayoutModule,
+    ObserversModule,
+    CdkScrollableModule,
+    PortalModule,
+    OverlayModule,
   ], // 在export
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },

@@ -1,0 +1,53 @@
+
+
+
+<h2> cdk-portal</h2>
+
+<div class="portal-demo">
+  <div class="tabs">
+    <button mat-button (click)="changePortal1()">功能1</button>
+    <button mat-button (click)="changePortal2()">功能2</button>
+    <button mat-button (click)="changePortal3()">功能3</button>
+    <button mat-button (click)="changePortal4()">功能4</button>
+  </div>
+  <div class="tab-content">
+    <div [cdkPortalOutlet]="currentPortal"></div>
+  </div>
+</div>
+
+<ng-template cdkPortal let-nameInTemplate="nameInPortal1">
+  <p>
+    Hi, {{ nameInTemplate }}, TemplatePortal: cdkPortal 需要放在 ng-template 裡面
+  </p>
+</ng-template>
+
+
+<p *cdkPortal>
+  TemplatePortal:也能換成語法糖 asterisk (*) 的方式
+</p>
+
+<ng-template #template let-nameInTemplate="nameInPortal3">
+  hi, {{nameInTemplate}}, 我放在ng-template內，但不是TemplatePortal，要用
+  TemplatePortal 包裝 TemplateRef 和用  ViewChild 引入的 template3
+</ng-template>
+
+
+<div class="content-wrapper"
+(cdkObserveContent)="projectContentChanged($event)"
+debounce="1000">
+  <ng-content></ng-content>
+</div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<div>
+  <button matButton (click)="createOutletOutOfApp()">使用DomPortalOutlet產生插座</button>
+  <button matButton (click)="addTemplatePortal()">插入內容</button>
+</div>
+
+

@@ -41,6 +41,11 @@ import { AddPostConfirmDialogComponent } from './blog/add-post-confirm-dialog/ad
 import { AfterPostNotifyComponent } from './blog/after-post-notify/after-post-notify.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { EmailListComponent } from './inbox/email-list/email-list.component';
+import { SurveyInputDirective } from './survey/survey-input.directive';
+import { CdkObserveContentDemoComponent } from './cdk-observe-content-demo/cdk-observe-content-demo.component';
+import { AutoLogoutComponent } from './auto-logout/auto-logout.component';
+import { SimpleHttpComponent } from './simple-http/simple-http.component';
+import { Portal4Component } from './portal4/portal4.component';
 
 
 
@@ -60,6 +65,11 @@ import { EmailListComponent } from './inbox/email-list/email-list.component';
     AfterPostNotifyComponent,
     InboxComponent,
     EmailListComponent,
+    SurveyInputDirective,
+    CdkObserveContentDemoComponent,
+    AutoLogoutComponent,
+    SimpleHttpComponent,
+    Portal4Component,
   ],
   imports: [
     BrowserModule,

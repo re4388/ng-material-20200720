@@ -1,6 +1,11 @@
 
 
 
+.cdk-mouse-focused {
+  color: #FB8C00;
+}
+
+
 
 .material-icons.orange600 { color: #FB8C00; }
 .material-icons.md-18 { font-size: 18px; }

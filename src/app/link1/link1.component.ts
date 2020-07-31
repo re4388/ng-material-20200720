@@ -92,7 +92,11 @@ export class Link1Component implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   /* data */
-  animal: Animal[] = [{ name: 'Dog' }, { name: 'Cat' }, { name: 'Horse' }];
+  animal: Animal[] = [
+    { name: 'Dog' },
+    { name: 'Cat' },
+    { name: 'Horse' }
+  ];
 
   add(event: MatChipInputEvent): void {
     const input = event.input;

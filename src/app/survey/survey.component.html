@@ -1,6 +1,39 @@
 <div class="left-padding">
+  <h2>a11y</h2>
+  <p>使用 LiveAnnouncer service，可讓朗讀程式 (Windows) 或 Voice Over (Mac) 唸出指定的文字</p>
+  <div class="basic-container">
+    <button mat-raised-button mat-button (click)="announce()">Announce</button>
+  </div>
+  <p>根據不同的FOCUS狀況(mouse, keyboard, program and touch)來設計樣式</p>
+  <div class="demo-focusable" tabindex="0" cdkMonitorElementFocus>
+    <p>div with element focus monitored</p>
+    <button mat-raised-button> 1</button>
+    <button mat-raised-button>2</button>
+  </div>
+
+  <div class="demo-focusable" tabindex="0" cdkMonitorSubtreeFocus>
+    <p>div with subtree focus monitored</p>
+    <button mat-raised-button>1</button>
+    <button mat-raised-button>2</button>
+  </div>
+  <div>
+    <h2>FocusTrap</h2>
+    <p>
+      形成一個 FocusTrap 區間，一般情況下，使用 Tab 將無法跳出這裡。 You can set
+      init,begin and end of the FocusTrap
+    </p>
+    <button mat-raised-button (click)="displayFocusTrap = !displayFocusTrap">
+      顯示輸入項</button>
+    <input value="cdkTrapFocus外的Input" />
+    <div cdkTrapFocus *ngIf="displayFocusTrap" cdkTrapFocusAutoCapture="true">
+      <input value="1" cdkFocusInitial />
+      <input value="2" cdkFocusRegionStart />
+      <input value="3" />
+      <input value="4" cdkFocusRegionEnd />
+    </div>
+  </div>
   <h2>Survey Demo</h2>
-  <button mat-button (click)="isLinear = !isLinear">切換Linear狀態</button>
+  <button mat-raised-button (click)="isLinear = !isLinear">切換Linear狀態</button>
 
   <form [formGroup]="surveyForm">
     <mat-vertical-stepper [linear]="isLinear">
@@ -13,22 +46,43 @@
           <u>個人資訊</u>
         </ng-template>
         <h4>提供個人資訊</h4>
-        <mat-form-field floatLabel="auto" color="primary">
-          <input name="name" matInput formControlName="name" required />
-          <mat-placeholder>
-            <mat-icon>person</mat-icon>請輸入您的姓名
-          </mat-placeholder>
-          <mat-hint align="end">
-            已輸入：
-            {{
-              surveyForm.get("basicQuestions")?.get("name")?.value?.length || 0
-            }}
-            / 5
-          </mat-hint>
-        </mat-form-field>
+        <div>
+          <mat-form-field
+            floatLabel="auto"
+            [hideRequiredMarker]="true"
+            hintLabel="最多輸入5個字"
+          >
+            <input
+              name="name"
+              matInput
+              formControlName="name"
+              maxlength="5"
+              required
+              appSurveyInput
+            />
+            <mat-placeholder>
+              <mat-icon>person</mat-icon>請輸入您的姓名
+            </mat-placeholder>
+            <mat-hint align="end">
+              已輸入：
+              {{
+                surveyForm.get("basicQuestions")?.get("name")?.value?.length ||
+                  0
+              }}
+              / 5
+            </mat-hint>
+            <mat-error>姓名欄位有錯誤</mat-error>
+          </mat-form-field>
+        </div>
         <div>
           <mat-form-field>
-            <input type="text" name="nickname" matInput placeholder="暱稱" />
+            <input
+              type="text"
+              name="nickname"
+              matInput
+              placeholder="暱稱"
+              appSurveyInput
+            />
           </mat-form-field>
         </div>
         <div>
@@ -40,6 +94,7 @@
               placeholder="國家"
               formControlName="country"
               [matAutocomplete]="countries"
+              appSurveyInput
             />
           </mat-form-field>
           <mat-autocomplete
@@ -63,6 +118,7 @@
               placeholder="代表技術"
               formControlName="majorTech"
               [matAutocomplete]="majorTechs"
+              appSurveyInput
             />
           </mat-form-field>
           <mat-autocomplete #majorTechs="matAutocomplete">
@@ -131,6 +187,7 @@
             <mat-datepicker
               #birthdayPicker
               [startAt]="startDate"
+              [touchUi]="isHandset$ | async"
             ></mat-datepicker>
           </mat-form-field>
         </div>
@@ -323,15 +380,5 @@
 
   <br /><br />
 
-
-
-
   <br /><br />
-
-
-
-
-
-
-
-  </div>
+</div>

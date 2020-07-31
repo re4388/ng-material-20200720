@@ -1,0 +1,17 @@
+<div style="padding-left: 20px;">
+  <div *ngFor="let i of items | async">
+    <div>
+      <ul>
+        <li>
+          <a href="{{i.html_url}}">{{ i.full_name | json }}</a>
+          <p>{{ i.description | json }}</p>
+        </li>
+      </ul>
+
+      <br />
+    </div>
+  </div>
+</div>
+
+
+<!-- [src]=getSantizeUrl(i.html_url) -->
